@@ -136,11 +136,6 @@ func removeInstallConfig() error {
 		return err
 	}
 
-	err = os.Remove("/mnt/etc/nixos/hardware-configuration.nix")
-	if err != nil {
-		return err
-	}
-
 	return nil
 }
 
