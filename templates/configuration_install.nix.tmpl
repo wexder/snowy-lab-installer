@@ -1,0 +1,46 @@
+#######################################################
+#                                                     #
+#   o-o                              o          o     #
+#  |                                 |          |     #
+#   o-o  o-o  o-o o   o   o o  o     |      oo  O-o   #
+#      | |  | | |  \ / \ /  |  |     |     / |  |  |  #
+#  o--o  o  o o-o   o   o   o--O     O---o o-o- o-o   #
+#                              |                      #
+#                           o--o                      #
+#                                                     #
+#######################################################
+
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+
+  boot.loader.grub.enable = true;
+  {{ if .IsEfi }}
+  {{ else }}
+  boot.loader.grub.device = "/dev/{{ .DiskName }}";
+  {{ end }}
+
+  # boot.loader.grub.efiSupport = true;
+  # boot.loader.grub.efiInstallAsRemovable = true;
+  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  networking.hostName = "{{ .Hostname }}";
+
+  # Define a user account
+  users.mutableUsers = false;
+   users.users.{{ .Username }} = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+     passwordFile = "/etc/passwordFile-{{ .Username }}";
+  };
+  # Disable password-based login for root.
+  users.users.root.hashedPassword = "!";
+  
+
+
+  system.stateVersion = "23.05"; 
+}

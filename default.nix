@@ -1,7 +1,15 @@
 { pkgs ? import <nixpkgs> { } }:
+let
+  snowyLabInstaller = pkgs.buildGoModule {
+    name = "snowy-lab-installer";
+    src = ./.;
+    vendorSha256 = "sha256-WiEK8nq13mdTFnyxDiMRWM1tb60mlZY0fVmtlH5ZWgw=";
+  };
 
-pkgs.mkShell {
-  name = "nixos-up";
-  buildInputs = with pkgs; [ python3 python3Packages.psutil python3Packages.requests ];
-  shellHook = "exec python3 ${./nixos-up.py}";
+in
+pkgs.mkShell
+{
+  name = "snowy-lab-installer";
+  buildInputs = with pkgs; [ go snowyLabInstaller ];
+  shellHook = "exec snowy-lab-installer";
 }
