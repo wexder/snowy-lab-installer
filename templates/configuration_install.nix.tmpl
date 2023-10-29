@@ -19,11 +19,15 @@
     ];
 
   boot.loader.grub.enable = true;
+  {{ if .IsEfi }}
+  boot.loader.systemd-boot.enable = true; # (for UEFI systems only)
+  {{ else }}
   boot.loader.grub.device = "/dev/{{ .DiskName }}";
+  {{ end }}
 
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # boot.loader.grub.efiSupport = true;
+  # boot.loader.grub.efiInstallAsRemovable = true;
+  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   networking.hostName = "{{ .Hostname }}";
 
