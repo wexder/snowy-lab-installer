@@ -18,10 +18,10 @@
       ./hardware-configuration.nix
     ];
 
-  boot.loader.grub.enable = true;
   {{ if .IsEfi }}
   boot.loader.systemd-boot.enable = true; # (for UEFI systems only)
   {{ else }}
+  boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/{{ .DiskName }}";
   {{ end }}
 
