@@ -341,7 +341,7 @@ func partitionName(diskName string, partition int32) string {
 	} else if strings.HasPrefix("nvme", strings.ToLower(diskName)) {
 		return fmt.Sprintf("%sp%d", diskName, partition)
 	} else {
-		fmt.Printf("Warning: this type of device driver has not been thoroughly tested with nixos-up, and its partition naming scheme may differ from what we expect..\n")
+		fmt.Printf("Warning: this type of device driver has not been thoroughly tested with nixos-up, and its partition naming scheme may differ from what we expect.. Type: %s\n", diskName)
 		return fmt.Sprintf("%s%d", diskName, partition)
 	}
 }
