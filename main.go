@@ -196,7 +196,7 @@ func generateInstallationConfig(diskName string, hostname string, username strin
 		IsEfi    bool
 	}{
 		Username: username,
-		DiskName: diskName,
+		DiskName: partitionName(diskName, 1),
 		Hostname: hostname,
 		IsEfi:    isEfi(),
 	})
