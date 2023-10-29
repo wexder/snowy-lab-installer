@@ -19,10 +19,7 @@
     ];
 
   boot.loader.grub.enable = true;
-  {{ if .IsEfi }}
-  {{ else }}
   boot.loader.grub.device = "/dev/{{ .DiskName }}";
-  {{ end }}
 
   # boot.loader.grub.efiSupport = true;
   # boot.loader.grub.efiInstallAsRemovable = true;
