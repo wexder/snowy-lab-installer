@@ -108,10 +108,10 @@ func install() error {
 		return fmt.Errorf("Failed removing installation config: %w", err)
 	}
 
-	err = generateSnowyLabConfig()
-	if err != nil {
-		return fmt.Errorf("Failed generating snowy lab config: %w", err)
-	}
+	// err = generateSnowyLabConfig()
+	// if err != nil {
+	// 	return fmt.Errorf("Failed generating snowy lab config: %w", err)
+	// }
 
 	// err = applySnowyLab()
 	// if err != nil {
