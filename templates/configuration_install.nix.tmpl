@@ -30,7 +30,6 @@
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   networking.hostName = "{{ .Hostname }}";
-  networking.networkmanager.enable = true;
 
   # Define a user account
   users.mutableUsers = false;
@@ -42,5 +41,9 @@
   # Disable password-based login for root.
   users.users.root.hashedPassword = "!";
   
+  environment.systemPackages = with pkgs;[
+    iwd
+  ];
+
   system.stateVersion = "23.05"; 
 }
