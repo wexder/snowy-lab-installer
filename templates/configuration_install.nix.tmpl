@@ -42,10 +42,5 @@
   # Disable password-based login for root.
   users.users.root.hashedPassword = "!";
   
-  environment.systemPackages = with pkgs;[
-    nvim
-    git
-  ];
-
   system.stateVersion = "23.05"; 
 }
